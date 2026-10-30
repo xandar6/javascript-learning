@@ -1,0 +1,12 @@
+{
+  "students": [
+    { "id": 3, "name": "Leo", "email": "leo@example.com" },
+    { "id": 4, "name": "Nina", "email": "nina@example.com" }
+  ],
+  "courses": [
+    { "id": 40, "title": "CSS Layout" }
+  ],
+  "enrolments": [
+    { "id": 201, "studentId": 3, "courseId": 40 }
+  ]
+}

@@ -1,0 +1,357 @@
+:root {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #213b36;
+  background: #f3f5f0;
+  --accent: #236451;
+  --muted: #61746c;
+  --border: #d9e2d9;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 280px;
+}
+body::before {
+  content: '';
+  display: block;
+  height: 6px;
+  background: var(--accent);
+}
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 56px 32px 80px;
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+header {
+  grid-column: 1 / -1;
+  margin-bottom: 12px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.eyebrow::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+h1 {
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+header > p:last-child {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+}
+.import-controls {
+  margin-top: 20px;
+}
+#import-feedback {
+  margin: 12px 0 0;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fff;
+  color: #213b36;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+#import-feedback[data-status='error'] {
+  background: #fff4ef;
+  border-color: #eccfc7;
+  color: #993a2c;
+}
+#storage-feedback {
+  margin: 20px 0 0;
+  padding: 14px 18px;
+  border: 1px solid #eccfc7;
+  border-left: 4px solid #a34336;
+  border-radius: 9px;
+  background: #fff4ef;
+  color: #993a2c;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+section {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 5px 20px #213b3605;
+}
+h2 {
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
+}
+.form-card {
+  border-top: 4px solid var(--accent);
+}
+form {
+  display: grid;
+  gap: 18px;
+}
+label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #42594f;
+}
+input,
+select,
+button {
+  font: inherit;
+}
+input:not([type='submit']):not([type='button']),
+select {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  border: 1px solid #cbd8cf;
+  border-radius: 9px;
+  background: #fbfcfa;
+  padding: 11px 13px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #213b36;
+}
+input::placeholder {
+  color: #738178;
+  opacity: 1;
+}
+input:not([type='submit']):hover {
+  border-color: #88a594;
+}
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 3px solid #86b595;
+  outline-offset: 3px;
+}
+input[readonly] {
+  background: #edf1ec !important;
+  color: #61746c !important;
+}
+button,
+input[type='submit'],
+input[type='button'] {
+  min-height: 42px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  padding: 9px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #f4f7f2;
+  color: var(--accent);
+  cursor: pointer;
+}
+input[type='submit'],
+button[type='submit'],
+button[data-action='add'],
+input[data-action='add'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  margin-top: 4px;
+}
+input[type='submit']:hover,
+button[type='submit']:hover,
+button[data-action='add']:hover,
+input[data-action='add']:hover {
+  background: #174c3d;
+  border-color: #174c3d;
+}
+button[data-action='edit'],
+input[data-action='edit'] {
+  background: #f4f7f2;
+  color: var(--accent);
+  border-color: var(--border);
+}
+button[data-action='edit']:hover,
+input[data-action='edit']:hover {
+  background: #e7eee3;
+  border-color: #a8bdac;
+}
+button[data-action='cancel'],
+input[data-action='cancel'] {
+  background: #f5f6f4;
+  color: #526058;
+  border-color: #d9ded8;
+}
+button[data-action='cancel']:hover,
+input[data-action='cancel']:hover {
+  background: #e9ece7;
+  border-color: #aab5aa;
+}
+button[data-action='delete'],
+input[data-action='delete'] {
+  color: #a34336;
+  background: #fff6f3;
+  border-color: #eed9d2;
+}
+button[data-action='delete']:hover,
+input[data-action='delete']:hover {
+  background: #fce9e2;
+  border-color: #d5a598;
+}
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.search-field {
+  margin-bottom: 24px;
+}
+#student-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#student-list li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px 0;
+  border-top: 1px solid #e8eee6;
+}
+#student-list li > span {
+  flex: 1 1 180px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.row-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  align-items: center;
+}
+#student-empty-message {
+  padding: 36px 18px;
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  background: #f7f9f5;
+  border: 1px dashed #cddacb;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+#student-form-errors {
+  padding: 12px 14px;
+  border: 1px solid #eccfc7;
+  border-radius: 9px;
+  background: #fff4ef;
+  color: #993a2c;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+[hidden] {
+  display: none !important;
+}
+.courses-card,
+.enrolments-card {
+  grid-column: 1 / -1;
+}
+#add-course-form,
+#add-enrolment-form {
+  grid-template-columns: minmax(100px, 140px) minmax(0, 1fr) auto;
+  align-items: end;
+  margin-bottom: 24px;
+}
+#add-course-form button {
+  min-height: 46px;
+}
+#course-form-errors {
+  grid-column: 1 / -1;
+  padding: 12px 14px;
+  border: 1px solid #eccfc7;
+  border-radius: 9px;
+  background: #fff4ef;
+  color: #993a2c;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+#add-enrolment-form {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+}
+#enrolment-form-errors {
+  grid-column: 1 / -1;
+  padding: 12px 14px;
+  border: 1px solid #eccfc7;
+  border-radius: 9px;
+  background: #fff4ef;
+  color: #993a2c;
+}
+.section-description {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: -8px 0 24px;
+}
+#course-list,
+#enrolment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#course-list li,
+#enrolment-list li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 18px 0;
+  border-top: 1px solid #e8eee6;
+}
+#course-list li > span,
+#enrolment-list li > span {
+  flex: 1 1 180px;
+  overflow-wrap: anywhere;
+}
+#course-empty-message,
+#enrolment-empty-message,
+#course-feedback {
+  padding: 18px;
+  border-radius: 9px;
+  background: #f7f9f5;
+  color: var(--muted);
+  line-height: 1.6;
+}
+@media (max-width: 760px) {
+  #add-course-form,
+  #add-enrolment-form {
+    grid-template-columns: 1fr;
+  }
+  main {
+    grid-template-columns: 1fr;
+    padding: 32px 18px 48px;
+    gap: 20px;
+  }
+  section {
+    padding: 22px;
+  }
+  header {
+    margin-bottom: 8px;
+  }
+}

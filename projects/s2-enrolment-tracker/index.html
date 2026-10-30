@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student enrolment tracker</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Student enrolment tracker</p>
+        <h1>Students</h1>
+        <p>Manage students and their course enrolments.</p>
+        <p id="storage-feedback" role="alert" hidden></p>
+        <div class="import-controls">
+          <button id="load-sample-button" type="button">Load sample data</button>
+          <p id="import-feedback" role="status" hidden></p>
+        </div>
+      </header>
+      <section aria-labelledby="add-student" class="form-card">
+        <h2 id="add-student">Add Student</h2>
+        <form id="add-student-form" data-domain="student">
+          <div>
+            <label for="id">
+              <span>Student ID</span>
+              <input type="number" name="id" id="id" min="1" step="1" required />
+            </label>
+          </div>
+          <div>
+            <label for="name">
+              <span>Full name</span>
+              <input type="text" name="name" id="name" required />
+            </label>
+          </div>
+          <div>
+            <label for="email">
+              <span>Email address</span>
+              <input type="email" name="email" id="email" required />
+            </label>
+          </div>
+          <div id="student-form-errors" class="form-errors" role="alert" hidden></div>
+          <input type="submit" data-action="add" value="Add" />
+          <button type="button" data-domain="student" data-action="cancel" hidden>Cancel</button>
+        </form>
+      </section>
+      <section aria-labelledby="students-heading">
+        <h2 id="students-heading">Student directory</h2>
+        <label for="student-search" class="search-field">
+          <span>Search students</span>
+          <input type="text" id="student-search" placeholder="Search by name…" />
+        </label>
+        <ul id="student-list"></ul>
+        <p id="student-empty-message" hidden>No students yet.</p>
+      </section>
+      <section aria-labelledby="courses-heading" class="courses-card">
+        <h2 id="courses-heading">Courses</h2>
+        <p class="section-description">Courses with enrolled students cannot be deleteds</p>
+        <form id="add-course-form" data-domain="course">
+          <label for="course-id">
+            <span>Course ID</span>
+            <input type="number" name="id" id="course-id" min="1" step="1" required />
+          </label>
+          <label for="course-title">
+            <span>Course title</span>
+            <input type="text" name="title" id="course-title" required />
+          </label>
+          <div>
+            <button type="submit" data-action="add">Add course</button>
+            <button type="button" data-domain="course" data-action="cancel" hidden>Cancel</button>
+          </div>
+          <div id="course-form-errors" class="form-errors" role="alert" hidden></div>
+        </form>
+        <ul id="course-list"></ul>
+        <p id="course-empty-message" hidden>No courses yet.</p>
+        <p id="course-feedback" role="status" hidden></p>
+      </section>
+      <section aria-labelledby="enrolments-heading" class="enrolments-card">
+        <h2 id="enrolments-heading">Enrolments</h2>
+        <form id="add-enrolment-form" data-domain="enrolment">
+          <label for="enrolment-student">
+            <span>Student</span>
+            <select id="enrolment-student" name="studentId" required>
+              <option value="">Choose a student</option>
+            </select>
+          </label>
+          <label for="enrolment-course">
+            <span>Course</span>
+            <select id="enrolment-course" name="courseId" required>
+              <option value="">Choose a course</option>
+            </select>
+          </label>
+          <!-- Enable once the submit handler is implemented. -->
+          <button type="submit" data-action="add">Enrol student</button>
+          <div id="enrolment-form-errors" class="form-errors" role="alert" hidden></div>
+        </form>
+        <ul id="enrolment-list"></ul>
+        <p id="enrolment-empty-message" hidden>No enrolments yet.</p>
+      </section>
+    </main>
+  </body>
+</html>

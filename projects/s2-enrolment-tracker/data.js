@@ -1,0 +1,17 @@
+// Supplied fictional sample data.
+export const initialState = {
+  students: [
+    { id: 1, name: "Alex", email: "alex@example.com" },
+    { id: 2, name: "Maya", email: "maya@example.com" }
+  ],
+  courses: [
+    { id: 10, title: "JavaScript" },
+    { id: 20, title: "HTML" },
+    { id: 30, title: "Python" }
+  ],
+  enrolments: [
+    { id: 101, studentId: 1, courseId: 10 },
+    { id: 102, studentId: 1, courseId: 20 },
+    { id: 103, studentId: 2, courseId: 10 }
+  ]
+};
