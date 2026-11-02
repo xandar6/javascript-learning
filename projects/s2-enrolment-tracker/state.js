@@ -73,6 +73,12 @@ export function searchStudent(state, query) {
   )
 }
 
+export function searchCourse(state, query) {
+  return state.courses.filter(
+    (course) => course.title.toLowerCase().includes(query)
+  )
+}
+
 export function findStudent(students, studentId) {
   return students.find((student) => student.id === studentId)
 }

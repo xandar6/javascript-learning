@@ -16,6 +16,7 @@ import {
   getEnrolmentDetails,
   getNextEnrolmentId,
   addEnrolment,
+  searchCourse,
 } from './state.js';
 
 import { loadState, saveState } from './storage.js';
@@ -23,7 +24,6 @@ import { loadState, saveState } from './storage.js';
 const studentList = document.querySelector('#student-list');
 const studentEmptyMessage = document.querySelector('#student-empty-message');
 const studentForm = document.querySelector('#add-student-form');
-const studentFormErrors = document.querySelector('#student-form-errors');
 const studentSearchInput = document.querySelector('#student-search');
 const studentSubmitBtn = studentForm.querySelector('input[data-action="add"]');
 const studentCancelBtn = studentForm.querySelector('button[data-action="cancel"]');
@@ -31,7 +31,7 @@ const studentCancelBtn = studentForm.querySelector('button[data-action="cancel"]
 const courseList = document.querySelector('#course-list');
 const courseEmptyMessage = document.querySelector('#course-empty-message');
 const courseForm = document.querySelector('#add-course-form');
-const courseFormErrors = document.querySelector('#course-form-errors');
+const courseSearchInput = document.querySelector('#course-search');
 const courseFeedback = document.querySelector('#course-feedback');
 const courseSubmitBtn = courseForm.querySelector('button[data-action="add"]');
 const courseCancelBtn = courseForm.querySelector('button[data-action="cancel"]');
@@ -59,6 +59,7 @@ studentCancelBtn.addEventListener('click', actionController);
 
 courseList.addEventListener('click', actionController);
 courseForm.addEventListener('submit', submitController);
+courseSearchInput.addEventListener('input', refreshCourses);
 courseCancelBtn.addEventListener('click', actionController);
 
 enrolmentList.addEventListener('click', actionController);
@@ -72,7 +73,6 @@ function actionController(e) {
   const action = button.dataset.action;
   const id = Number(button.dataset.id);
   const domain = button.dataset.domain;
-  // console.log('actionController domain: ', domain);
 
   switch (domain) {
     case 'student':
@@ -134,7 +134,7 @@ function handleCourseAction(courseId, action) {
       break;
   }
 
-  renderCourses(state.courses);
+  refreshCourses()
 }
 
 function handleEnrolmentAction(enrolmentId, action) {
@@ -208,7 +208,7 @@ function handleCourseformSubmit(course, form) {
     state = newState;
   }
   hideFormErrors(form)
-  renderCourses(state.courses);
+  refreshCourses()
   resetCourseForm();
   refreshEnrolments();
   renderEnrolmentOptions();
@@ -333,7 +333,7 @@ async function loadSampleState() {
     state = importedState
     resetUI()
     refreshStudents()
-    renderCourses(state.courses);
+    refreshCourses()
     refreshEnrolments();
     renderEnrolmentOptions();
     persistState()
@@ -374,6 +374,12 @@ function refreshStudents() {
   const query = studentSearchInput.value.trim().toLowerCase();
   const matches = searchStudent(state, query);
   renderStudents(matches);
+}
+
+function refreshCourses() {
+  const query = courseSearchInput.value.trim().toLowerCase();
+  const matches = searchCourse(state, query);
+  renderCourses(matches)
 }
 
 function refreshEnrolments() {
@@ -430,7 +436,9 @@ function renderCourses(courses) {
   courseEmptyMessage.hidden = true;
 
   if (courses.length === 0) {
-    courseEmptyMessage.textContent = 'No courses yet';
+    courseEmptyMessage.textContent = state.courses.length === 0
+      ? 'No courses yet'
+      : 'No matching courses'
     courseEmptyMessage.hidden = false;
     return;
   }
@@ -570,10 +578,11 @@ function resetUI() {
   resetCourseForm()
   resetEnrolmentForm()
   studentSearchInput.value = ''
+  courseSearchInput.value = ''
 }
 
 initializeState()
 refreshStudents();
-renderCourses(state.courses);
+refreshCourses()
 refreshEnrolments();
 renderEnrolmentOptions();
